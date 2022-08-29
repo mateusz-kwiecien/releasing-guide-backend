@@ -18,6 +18,9 @@ import static pl.mkwiecien.releasingguide.domain.configuration.ConfigurationFixt
 @WebMvcTest(GetConfigurationController)
 @ContextConfiguration(classes = AppTestConfiguration)
 class GetConfigurationControllerSpec extends Specification {
+    private static final String LATEST_RELEASED = 'D5F5E3'
+    private static final String LATEST_COMPLEX = 'FCF3CF'
+    private static final String LATEST_BLOCKED = 'F5B7B1'
 
     @Autowired
     private MockMvc mockMvc
@@ -39,8 +42,7 @@ class GetConfigurationControllerSpec extends Specification {
 
     def "should return valid configuration when there is any saved in database"() {
         given:
-            def existingConfiguration = ConfigurationFixture.validConfiguration()
-            repository.save(existingConfiguration)
+            repository.save(ConfigurationFixture.validConfiguration())
 
         expect:
             mockMvc.perform(get("/configuration")
@@ -51,6 +53,32 @@ class GetConfigurationControllerSpec extends Specification {
                     .andExpect(jsonPath('$.colourPalette.released').value(RELEASED_COLOUR))
                     .andExpect(jsonPath('$.colourPalette.complex').value(COMPLEX_COLOUR))
                     .andExpect(jsonPath('$.colourPalette.blocked').value(BLOCKED_COLOUR))
+    }
+
+    def "should retrieve latest configuration when there is several saved in database"() {
+        given:
+            repository.save(ConfigurationFixture.validConfiguration())
+
+        and:
+            def latestConfiguration = ConfigurationFixture.validConfiguration(colourPalette: latestColourPalette())
+            repository.save(latestConfiguration)
+
+        expect:
+            mockMvc.perform(get("/configuration")
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath('$.id').isNotEmpty())
+                    .andExpect(jsonPath('$.created').isNotEmpty())
+                    .andExpect(jsonPath('$.colourPalette.released').value(LATEST_RELEASED))
+                    .andExpect(jsonPath('$.colourPalette.complex').value(LATEST_COMPLEX))
+                    .andExpect(jsonPath('$.colourPalette.blocked').value(LATEST_BLOCKED))
+
+        and:
+            repository.count() == 2
+    }
+
+    def static latestColourPalette() {
+        new ColourPalette(LATEST_RELEASED, LATEST_COMPLEX, LATEST_BLOCKED)
     }
 
     def setup() {

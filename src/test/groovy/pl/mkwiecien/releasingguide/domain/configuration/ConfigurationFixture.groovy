@@ -23,4 +23,12 @@ class ConfigurationFixture {
                 map.blocked as String ?: BLOCKED_COLOUR
         )
     }
+
+    static def validConfigurationRequest(Map map = [:]) {
+        new ConfigurationRequest(
+                map.released as String ?: RELEASED_COLOUR,
+                map.complex as String ?: COMPLEX_COLOUR,
+                map.blocked as String ?: BLOCKED_COLOUR
+        )
+    }
 }
