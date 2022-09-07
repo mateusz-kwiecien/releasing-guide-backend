@@ -1,4 +1,4 @@
-package pl.mkwiecien.releasingguide.domain.configuration;
+package pl.mkwiecien.releasingguide.app.domain.configuration;
 
 public interface GetConfigurationPort {
 

@@ -1,19 +1,19 @@
-package pl.mkwiecien.releasingguide.domain.configuration
+package pl.mkwiecien.releasingguide.app.domain.configuration
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
-import pl.mkwiecien.releasingguide.config.AppTestConfiguration
+import pl.mkwiecien.releasingguide.AppTestConfiguration
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import static pl.mkwiecien.releasingguide.domain.configuration.ConfigurationFixture.BLOCKED_COLOUR
-import static pl.mkwiecien.releasingguide.domain.configuration.ConfigurationFixture.COMPLEX_COLOUR
-import static pl.mkwiecien.releasingguide.domain.configuration.ConfigurationFixture.RELEASED_COLOUR
+import static ConfigurationFixture.BLOCKED_COLOUR
+import static ConfigurationFixture.COMPLEX_COLOUR
+import static ConfigurationFixture.RELEASED_COLOUR
 
 @WebMvcTest(GetConfigurationController)
 @ContextConfiguration(classes = AppTestConfiguration)

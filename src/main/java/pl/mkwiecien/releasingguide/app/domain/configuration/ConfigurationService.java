@@ -1,7 +1,7 @@
-package pl.mkwiecien.releasingguide.domain.configuration;
+package pl.mkwiecien.releasingguide.app.domain.configuration;
 
 import org.springframework.stereotype.Service;
-import pl.mkwiecien.releasingguide.domain.util.TimeService;
+import pl.mkwiecien.releasingguide.app.util.TimeService;
 
 import java.time.Instant;
 
