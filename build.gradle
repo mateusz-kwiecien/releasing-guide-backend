@@ -3,11 +3,26 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id 'groovy'
+	id 'application'
 }
 
 group = 'pl.mkwiecien'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '17'
+targetCompatibility = '17'
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
+application {
+	mainClass.set("pl.mkwiecien.releasingguide.config.App")
+}
 
 repositories {
 	mavenCentral()

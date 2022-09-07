@@ -1,4 +1,4 @@
-package pl.mkwiecien.releasingguide.domain.util;
+package pl.mkwiecien.releasingguide.app.util;
 
 import org.springframework.stereotype.Service;
 

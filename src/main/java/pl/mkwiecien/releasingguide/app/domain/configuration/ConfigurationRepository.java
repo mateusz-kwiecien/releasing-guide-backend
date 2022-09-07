@@ -1,4 +1,4 @@
-package pl.mkwiecien.releasingguide.domain.configuration;
+package pl.mkwiecien.releasingguide.app.domain.configuration;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

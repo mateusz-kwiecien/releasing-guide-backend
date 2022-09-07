@@ -1,4 +1,8 @@
-package pl.mkwiecien.releasingguide.domain.configuration
+package pl.mkwiecien.releasingguide.app.domain.configuration
+
+import pl.mkwiecien.releasingguide.app.domain.configuration.ColourPalette
+import pl.mkwiecien.releasingguide.app.domain.configuration.Configuration
+import pl.mkwiecien.releasingguide.app.domain.configuration.ConfigurationRequest
 
 import java.time.Instant
 

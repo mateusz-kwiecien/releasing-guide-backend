@@ -1,4 +1,4 @@
-package pl.mkwiecien.releasingguide.domain.configuration;
+package pl.mkwiecien.releasingguide.app.domain.configuration;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

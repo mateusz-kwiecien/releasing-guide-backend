@@ -15,3 +15,15 @@ This is the first part, second will be frontend application, where I plan to use
 learning purposes)
 
 As the whole project, this readme file also will be developed and filled with necessary info.
+
+---
+
+### Run as Docker container
+
+First build an image being in a root folder where the Dockerfile is:
+
+> docker image build -t releasing-guide .
+
+Then run container, providing basic MongoDB properties:
+
+> docker run -e MONGO_DB_HOST={host} -e MONGO_DB_PORT={port} -e MONGO_DB_USER={username} -e MONGO_DB_PASSWORD={password} releasing-guide
