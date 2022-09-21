@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database/db:/data/db
+      - ./database/dev.archive:/Databases/dev.archive
+      - ./database/production:/Databases/production
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express
+    container_name: mexpress
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo:27017/?authSource=admin
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    depends_on:
+      - "mongo"
+    networks:
+      - backend
+
+  backend:
+    image: releasing-guide-backend
+    container_name: backend
+    environment:
+      - MONGO_DB_USERNAME=root
+      - MONGO_DB_PASSWORD=password
+      - MONGO_DB_PORT=27017
+      - MONGO_DB_HOST=mongo
+      - MONGO_DB_DATABASE=releasing-guide
+      - MONGO_DB_AUTH_DATABASE=admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "mongo"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
